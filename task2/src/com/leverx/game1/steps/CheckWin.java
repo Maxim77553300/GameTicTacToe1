@@ -2,9 +2,23 @@ package com.leverx.game1.steps;
 
 public class CheckWin {
 
-    private boolean win;
+    public boolean win = false;
 
-    public boolean checkDiagonal1(char[][] arr) {
+    public boolean checkWinForYou(char[][] arr) {
+
+        if (checkDiagonal1(arr)) {
+            win = true;
+        } else if (checkDiagonal2(arr)) {
+            win = true;
+        } else if (checkHorizontal(arr)) {
+            win = true;
+        } else if (checkVertical(arr)) {
+            win = true;
+        }
+        return win;
+    }
+
+    private boolean checkDiagonal1(char[][] arr) {
         int diagonal = 1;
         int start1 = arr[0][0];
         char symbol;
@@ -26,10 +40,9 @@ public class CheckWin {
             }
         }
         return false;
-
     }
 
-    public boolean checkDiagonal2(char[][] arr) {
+    private boolean checkDiagonal2(char[][] arr) {
 
         int diagonal = 0;
         char symbol;
@@ -38,8 +51,6 @@ public class CheckWin {
 
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length - 1; j++) {
-
-
                 if (i == 0) {
                     count++;
                 } else {
@@ -47,11 +58,7 @@ public class CheckWin {
                 }
             }
         }
-        System.out.println("count " + count);
-
         start2 = arr[0][count];
-        System.out.println(start2);
-
 
         if (start2 != '|') {
             symbol = arr[0][count];
@@ -75,8 +82,7 @@ public class CheckWin {
 
     }
 
-
-    public boolean checkVertical(char[][] arr) {
+    private boolean checkVertical(char[][] arr) {
 
         int vertical0 = 1;
         int verticalX = 1;
@@ -97,11 +103,10 @@ public class CheckWin {
                 return true;
             }
         }
-        System.out.println("Vertical dublicate 0 " + vertical0 + " X " + verticalX);
         return false;
     }
 
-    public boolean checkHorizontal(char[][] arr) {
+    private boolean checkHorizontal(char[][] arr) {
         int horizontal0 = 1;
         int horizontalX = 1;
 
@@ -114,7 +119,6 @@ public class CheckWin {
                 } else if (arr[i][j] == arr[i][j + 1] && arr[i][j] == 'X') {
                     horizontalX++;
                 }
-
             }
             if (horizontal0 == 3) {
                 System.out.println("You Win!!");
@@ -124,7 +128,6 @@ public class CheckWin {
                 return true;
             }
         }
-        System.out.println("Horizontal dublicate 0 " + horizontal0 + " X " + horizontalX);
 
         return false;
     }
