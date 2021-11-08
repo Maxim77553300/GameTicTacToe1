@@ -1,13 +1,14 @@
-package com.leverx.game1.steps;
+package com.leverx.freeman.steps;
 
 
-import com.leverx.game1.MyException;
+import com.leverx.freeman.exceptions.MyException;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class StepPlayer implements NextStep {
-
-
+     private ResourceBundle bundle = ResourceBundle.getBundle("com.leverx.freeman.resources.messages");
+     private String error2 = bundle.getString("error2");
     @Override
     public char[][] nextStep(char[][] arr, String index) throws IOException, MyException {
 
@@ -17,7 +18,7 @@ public class StepPlayer implements NextStep {
         if (arr[i][j] == '|') {
             arr[i][j] = '0';
         } else {
-            throw new MyException("Error! This place is occupated");
+            throw new MyException(error2);
 
         }
 

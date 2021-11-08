@@ -1,6 +1,6 @@
-package com.leverx.game1.steps;
+package com.leverx.freeman.steps;
 
-import com.leverx.game1.MyException;
+import com.leverx.freeman.exceptions.MyException;
 
 import java.io.IOException;
 

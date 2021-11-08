@@ -1,4 +1,4 @@
-package com.leverx.game1.steps;
+package com.leverx.freeman.steps;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package com.leverx.game1.fill;
+package com.leverx.freeman.fill;
 
 public class StarterFill {
 

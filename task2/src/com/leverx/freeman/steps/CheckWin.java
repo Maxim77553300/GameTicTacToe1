@@ -1,7 +1,12 @@
-package com.leverx.game1.steps;
+package com.leverx.freeman.steps;
+
+import java.util.ResourceBundle;
 
 public class CheckWin {
 
+    private ResourceBundle bundle = ResourceBundle.getBundle("com.leverx.freeman.resources.messages");
+    private String youWin = bundle.getString("Win");
+    private String pcWin = bundle.getString("pcWin");
     public boolean win = false;
 
     public boolean checkWinForYou(char[][] arr) {
@@ -32,10 +37,10 @@ public class CheckWin {
                 }
             }
             if (diagonal == 3 && symbol == '0') {
-                System.out.println("You Win!!");
+                System.out.println(youWin);
                 return true;
             } else if (diagonal == 3 && symbol == 'X') {
-                System.out.println("Computer Win!!");
+                System.out.println(pcWin);
                 return true;
             }
         }
@@ -49,6 +54,7 @@ public class CheckWin {
         char start2 = '|';
         int count = 0;
 
+
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length - 1; j++) {
                 if (i == 0) {
@@ -61,20 +67,23 @@ public class CheckWin {
         start2 = arr[0][count];
 
         if (start2 != '|') {
+            count = 0;
             symbol = arr[0][count];
             for (int i = 0; i <= count; i++) {
                 for (int j = count; j >= 0; j--) {
                     if (arr[i][j] == symbol) {
                         diagonal++;
-                        System.out.println(diagonal + "check");
+                        System.out.println(diagonal);
                     }
                 }
             }
+
             if (diagonal == 3 && symbol == '0') {
-                System.out.println("You Win!!");
+
+                System.out.println(youWin);
                 return true;
             } else if (diagonal == 3 && symbol == 'X') {
-                System.out.println("Computer Win!!");
+                System.out.println(pcWin);
                 return true;
             }
         }
@@ -96,10 +105,10 @@ public class CheckWin {
                 }
             }
             if (vertical0 == 3) {
-                System.out.println("You Win!!");
+                System.out.println(youWin);
                 return true;
             } else if (verticalX == 3) {
-                System.out.println("Computer Win!!");
+                System.out.println(pcWin);
                 return true;
             }
         }
@@ -121,10 +130,10 @@ public class CheckWin {
                 }
             }
             if (horizontal0 == 3) {
-                System.out.println("You Win!!");
+                System.out.println(youWin);
                 return true;
             } else if (horizontalX == 3) {
-                System.out.println("Computer Win!!");
+                System.out.println(pcWin);
                 return true;
             }
         }
