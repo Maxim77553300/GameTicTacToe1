@@ -1,16 +1,23 @@
 package com.leverx.freeman.entity;
 
-import com.leverx.freeman.exceptions.MyException;
-import com.leverx.freeman.steps.StepPlayer;
+public class User implements Player {
 
-import java.io.IOException;
+    private String name;
 
-public class User implements Player{
+    public User(String name) {
+        this.name = name;
+    }
 
-    StepPlayer stepPlayer = new StepPlayer();
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
-    public void move(char[][] arr,int[] step) throws MyException {
-        stepPlayer.nextStep(arr,step);
+    public void move() {
+
     }
 }

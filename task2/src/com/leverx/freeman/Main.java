@@ -12,10 +12,8 @@ public class Main {
 
         try {
             starter.methodStart();
-        } catch (MyException e) {
+        } catch (MyException | IOException e) {
             System.out.println(e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

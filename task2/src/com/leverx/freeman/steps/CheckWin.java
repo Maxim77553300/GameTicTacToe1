@@ -1,12 +1,7 @@
 package com.leverx.freeman.steps;
 
-import java.util.ResourceBundle;
-
 public class CheckWin {
 
-    private ResourceBundle bundle = ResourceBundle.getBundle("com.leverx.freeman.resources.messages");
-    private String youWin = bundle.getString("Win");
-    private String pcWin = bundle.getString("pcWin");
     public boolean win = false;
 
     public boolean checkWinForYou(char[][] arr) {
@@ -19,6 +14,10 @@ public class CheckWin {
             win = true;
         } else if (checkVertical(arr)) {
             win = true;
+        } else if (checkNoneWin(arr)){
+            win = false;
+            System.out.println(Output.draw);
+            System.exit(1);
         }
         return win;
     }
@@ -36,12 +35,12 @@ public class CheckWin {
                     diagonal++;
                 }
             }
-            System.out.println("d1 -" + diagonal );
+
             if (diagonal == 3 && symbol == '0') {
-                System.out.println(youWin);
+                System.out.println(Output.youWin);
                 return true;
             } else if (diagonal == 3 && symbol == 'X') {
-                System.out.println(pcWin);
+                System.out.println(Output.pcWin);
                 return true;
             }
         }
@@ -68,34 +67,37 @@ public class CheckWin {
         start2 = arr[0][count];
 
         if (start2 != '|') {
-            count = 0;
+            int count1 = 0;
             symbol = arr[0][count];
-            for (int i = 0; i <= count; i++) {
-                for (int j = count; j >= 0; j--) {
-                    if (arr[i][j] == symbol) {
-                        diagonal++;
-                        System.out.println("d2 -" + diagonal);
-                    }
+
+            while( count >=0 ){
+                if (arr[count1][count] == symbol){
+                    diagonal++;
+
                 }
+                count--;
+                count1++;
             }
 
             if (diagonal == 3 && symbol == '0') {
 
-                System.out.println(youWin);
+                System.out.println(Output.youWin);
                 return true;
             } else if (diagonal == 3 && symbol == 'X') {
-                System.out.println(pcWin);
+
+                System.out.println(Output.pcWin);
                 return true;
             }
         }
+
         return false;
 
     }
 
     private boolean checkVertical(char[][] arr) {
 
-        int vertical0 = 0;
-        int verticalX = 0;
+        int vertical0 = 1;
+        int verticalX = 1;
 
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length; j++) {
@@ -105,13 +107,12 @@ public class CheckWin {
                     verticalX++;
                 }
             }
-            System.out.println("vert0 -" + vertical0);
-            System.out.println("vertX -" + verticalX );
+
             if (vertical0 == 3) {
-                System.out.println(youWin);
+                System.out.println(Output.youWin);
                 return true;
             } else if (verticalX == 3) {
-                System.out.println(pcWin);
+                System.out.println(Output.pcWin);
                 return true;
             }
         }
@@ -119,8 +120,8 @@ public class CheckWin {
     }
 
     private boolean checkHorizontal(char[][] arr) {
-        int horizontal0 = 0;
-        int horizontalX = 0;
+        int horizontal0 = 1;
+        int horizontalX = 1;
 
         for (int i = 0; i < arr.length; i++) {
 
@@ -132,17 +133,41 @@ public class CheckWin {
                     horizontalX++;
                 }
             }
-            System.out.println("H0 -" + horizontal0);
-            System.out.println("HX -" + horizontalX);
+
             if (horizontal0 == 3) {
-                System.out.println(youWin);
+                System.out.println(Output.youWin);
                 return true;
             } else if (horizontalX == 3) {
-                System.out.println(pcWin);
+                System.out.println(Output.pcWin);
                 return true;
             }
         }
 
+        return false;
+    }
+
+    private boolean checkNoneWin(char[][] arr){
+
+        int horizontal = 0;
+
+        int size = 0;
+        for (int i = 0; i < arr.length; i++) {
+            size += arr.length;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+
+            for (int j = 0; j < arr.length ; j++) {
+
+                if (arr[i][j]  != '|') {
+                    horizontal++;
+                }
+                }
+            }
+
+        if(horizontal == size){
+            return true;
+        }
         return false;
     }
 }

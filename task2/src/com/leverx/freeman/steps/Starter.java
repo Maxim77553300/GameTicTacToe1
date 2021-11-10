@@ -14,54 +14,54 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import static jdk.nashorn.internal.runtime.JSType.isNumber;
 
 public class Starter {
 
-
-    private ResourceBundle bundle = ResourceBundle.getBundle("com.leverx.freeman.resources.messages");
-    private String error1 = bundle.getString("error1");
     private StarterFill starterFill = new StarterFill();
     private CheckWin checkWin = new CheckWin();
     private FillMatrix showMatrix;
-    private Go step = new Go();
     private char[][] arr = new char[3][3];
     private int[] index = null;
 
     public void methodStart() throws MyException, IOException {
 
+        List<Player> listPlayers = choicePlayer();
+
+        StepPlayers stepPlayers = new StepPlayersImpl();
 
         starterFill.fill = new FillMatrixImpl();
 
         int i = 1;
 
-        do {
-            starterFill.fill.fillMatrix(arr);
-            i--;
-        } while (i == 1);
+        starterFill.fill.fillMatrix(arr);
 
-        while (checkWin.win == false) {
 
-            step.nextStepGo = new StepPlayer();
-
-            index = inputNumber();
+        while (!checkWin.win) {
             showMatrix = new ShowMatrix();
 
-            step.go(arr, index);
+            if (listPlayers.get(0).getClass() == User.class) {
+                index = inputNumber();
+                stepPlayers.doStep(arr, index, listPlayers);
 
-            step.nextStepGo = new StepComputer();
-            step.go(arr, index);
+            }
+
+            if (listPlayers.get(0).getClass() == Computer.class) {
+                stepPlayers.doStep(arr, index, listPlayers);
+                showMatrix.fillMatrix(arr);
+            }
+            stepPlayers.doStep(arr, index, listPlayers);
             showMatrix.fillMatrix(arr);
 
             checkWin.checkWinForYou(arr);
+
         }
 
     }
 
-    public int[] inputNumber() throws MyException {
+    public int[] inputNumber() {
         String a = null;
         int[] coordinate = new int[2];
 
@@ -75,7 +75,7 @@ public class Starter {
                 coordinate[1] = Integer.parseInt(a.substring(1, 2));
 
             } else {
-                throw new MyException(error1);
+                throw new MyException(Output.error1);
             }
             return coordinate;
 
@@ -90,24 +90,27 @@ public class Starter {
     public List<Player> choicePlayer() {
         List<Player> list = new ArrayList<>(2);
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please, make your choice Type: 1 - Game Human vs Computer \n 2 - Game Computer vs Computer \n 3 - Game Human vs Human");
+        System.out.println(Output.choice);
         String a = scanner.nextLine();
 
-        switch (a){
-            case "1" :
-            list.add(new User());
-            list.add(new Computer());
-            break;
-            case "2" :
-            list.add(new Computer());
-            list.add(new Computer());
-            break;
-            case "3" :
-            list.add(new User());
-            list.add(new User());
-            break;
+        switch (a) {
+            case "1":
+                list.add(new User("0"));
+                list.add(new Computer("X"));
+                System.out.println(Output.HvsC);
+                break;
+            case "2":
+                list.add(new Computer("0"));
+                list.add(new Computer("X"));
+                System.out.println(Output.CvsC);
+                break;
+            case "3":
+                list.add(new User("0"));
+                list.add(new User("X"));
+                System.out.println(Output.HvsH);
+                break;
             default:
-                System.out.println(error1);
+                System.out.println(Output.error1);
                 break;
         }
         return list;
