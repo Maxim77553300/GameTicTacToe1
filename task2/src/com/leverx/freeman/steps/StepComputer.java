@@ -6,13 +6,16 @@ public class StepComputer implements NextStep {
     Random random = new Random();
 
     @Override
-    public char[][] nextStep(char[][] arr, String index) {
+    public char[][] nextStep(char[][] arr, int[] index) {
+
         int i = random.nextInt(3);
-        System.out.println(i);
+
         int j = random.nextInt(3);
-        System.out.println(j);
-        if (index != null) {
+
+        if (index != null && arr[i][j] == '|') {
             arr[i][j] = 'X';
+        } else {
+
         }
         return arr;
 

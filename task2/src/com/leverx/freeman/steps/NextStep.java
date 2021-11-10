@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface NextStep {
 
-    char[][] nextStep(char[][] arr, String step) throws MyException, IOException;
+    char[][] nextStep(char[][] arr, int[] step) throws MyException, IOException;
 }

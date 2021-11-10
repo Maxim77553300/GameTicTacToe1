@@ -8,7 +8,7 @@ public class Go {
 
     public NextStep nextStepGo;
 
-    public void go(char[][] arr,String step) throws MyException, IOException {
+    public void go(char[][] arr,int[] step) throws MyException, IOException {
         nextStepGo.nextStep(arr,step);
     }
 }

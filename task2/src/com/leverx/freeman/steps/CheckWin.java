@@ -36,6 +36,7 @@ public class CheckWin {
                     diagonal++;
                 }
             }
+            System.out.println("d1 -" + diagonal );
             if (diagonal == 3 && symbol == '0') {
                 System.out.println(youWin);
                 return true;
@@ -73,7 +74,7 @@ public class CheckWin {
                 for (int j = count; j >= 0; j--) {
                     if (arr[i][j] == symbol) {
                         diagonal++;
-                        System.out.println(diagonal);
+                        System.out.println("d2 -" + diagonal);
                     }
                 }
             }
@@ -93,8 +94,8 @@ public class CheckWin {
 
     private boolean checkVertical(char[][] arr) {
 
-        int vertical0 = 1;
-        int verticalX = 1;
+        int vertical0 = 0;
+        int verticalX = 0;
 
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length; j++) {
@@ -104,6 +105,8 @@ public class CheckWin {
                     verticalX++;
                 }
             }
+            System.out.println("vert0 -" + vertical0);
+            System.out.println("vertX -" + verticalX );
             if (vertical0 == 3) {
                 System.out.println(youWin);
                 return true;
@@ -116,8 +119,8 @@ public class CheckWin {
     }
 
     private boolean checkHorizontal(char[][] arr) {
-        int horizontal0 = 1;
-        int horizontalX = 1;
+        int horizontal0 = 0;
+        int horizontalX = 0;
 
         for (int i = 0; i < arr.length; i++) {
 
@@ -129,6 +132,8 @@ public class CheckWin {
                     horizontalX++;
                 }
             }
+            System.out.println("H0 -" + horizontal0);
+            System.out.println("HX -" + horizontalX);
             if (horizontal0 == 3) {
                 System.out.println(youWin);
                 return true;

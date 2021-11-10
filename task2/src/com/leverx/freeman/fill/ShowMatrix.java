@@ -14,7 +14,7 @@ public class ShowMatrix implements FillMatrix {
             }
             System.out.println();
         }
-        System.out.println(step);
+      //  System.out.println(step);
     }
 }
 
