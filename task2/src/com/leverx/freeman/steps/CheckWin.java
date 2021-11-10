@@ -14,7 +14,7 @@ public class CheckWin {
             win = true;
         } else if (checkVertical(arr)) {
             win = true;
-        } else if (checkNoneWin(arr)){
+        } else if (checkNoneWin(arr)) {
             win = false;
             System.out.println(Output.draw);
             System.exit(1);
@@ -70,8 +70,8 @@ public class CheckWin {
             int count1 = 0;
             symbol = arr[0][count];
 
-            while( count >=0 ){
-                if (arr[count1][count] == symbol){
+            while (count >= 0) {
+                if (arr[count1][count] == symbol) {
                     diagonal++;
 
                 }
@@ -146,7 +146,7 @@ public class CheckWin {
         return false;
     }
 
-    private boolean checkNoneWin(char[][] arr){
+    private boolean checkNoneWin(char[][] arr) {
 
         int horizontal = 0;
 
@@ -157,15 +157,15 @@ public class CheckWin {
 
         for (int i = 0; i < arr.length; i++) {
 
-            for (int j = 0; j < arr.length ; j++) {
+            for (int j = 0; j < arr.length; j++) {
 
-                if (arr[i][j]  != '|') {
+                if (arr[i][j] != '|') {
                     horizontal++;
                 }
-                }
             }
+        }
 
-        if(horizontal == size){
+        if (horizontal == size) {
             return true;
         }
         return false;
