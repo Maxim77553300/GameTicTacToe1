@@ -4,17 +4,18 @@ import java.util.ResourceBundle;
 
 public class Output {
 
-    private static ResourceBundle bundle = ResourceBundle.getBundle("com.leverx.freeman.resources.messages");
-    protected static String youWin = bundle.getString("Win");
-    protected static String pcWin = bundle.getString("pcWin");
-    protected static String step = bundle.getString("step");
-    private static String line = bundle.getString("line");
-    protected static String draw = bundle.getString("draw");
-    protected static String error1 = bundle.getString("error1");
-    protected static String choice = bundle.getString("choice");
-    protected static String HvsC = bundle.getString("HvsC");
-    protected static String CvsC = bundle.getString("CvsC");
-    protected static String HvsH = bundle.getString("HvsH");
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("com.leverx.freeman.resources.messages");
+    protected static final String youWin = bundle.getString("Win");
+    protected static final String pcWin = bundle.getString("pcWin");
+    protected static final String step = bundle.getString("step");
+    private static final String line = bundle.getString("line");
+    protected static final String draw = bundle.getString("draw");
+    protected static final String error1 = bundle.getString("error1");
+    protected static final String choice = bundle.getString("choice");
+    protected static final String HvsC = bundle.getString("HvsC");
+    protected static final String CvsC = bundle.getString("CvsC");
+    protected static final String HvsH = bundle.getString("HvsH");
+    protected static final String name = bundle.getString("name");
 
     public static String getLine() {
         return line;

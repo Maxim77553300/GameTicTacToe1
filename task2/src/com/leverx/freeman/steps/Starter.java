@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static jdk.nashorn.internal.runtime.JSType.isNumber;
 
@@ -26,51 +25,66 @@ public class Starter {
     private char[][] arr = new char[3][3];
     private int[] index = null;
     public static int count = 0;
+    private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 
     public void methodStart() throws MyException, IOException {
+        try {
 
-        List<Player> listPlayers = choicePlayer();
+            List<Player> listPlayers = choicePlayer();
 
-        StepPlayers stepPlayers = new StepPlayersImpl();
+            StepPlayers stepPlayers = new StepPlayersImpl();
 
-        starterFill.fill = new FillMatrixImpl();
+            starterFill.fill = new FillMatrixImpl();
 
-        int i = 1;
+            int i = 1;
 
-        starterFill.fill.fillMatrix(arr);
+            starterFill.fill.fillMatrix(arr);
 
+            while (!checkWin.win) {
+                showMatrix = new ShowMatrix();
 
-        while (!checkWin.win) {
-            showMatrix = new ShowMatrix();
+                if (listPlayers.get(0).getClass() == User.class && listPlayers.get(1).getClass() == Computer.class) {
+                    index = inputNumber();
+                    stepPlayers.doStep(arr, index, listPlayers);
+                    stepPlayers.doStep(arr, index, listPlayers);
+                }
 
+                if (listPlayers.get(0).getClass() == Computer.class) {
+                    stepPlayers.doStep(arr, index, listPlayers);
+                    showMatrix.fillMatrix(arr);
+                    stepPlayers.doStep(arr, index, listPlayers);
+                }
 
-            if (listPlayers.get(0).getClass() == User.class && listPlayers.get(1).getClass() == Computer.class) {
-                index = inputNumber();
-                stepPlayers.doStep(arr, index, listPlayers);
-                stepPlayers.doStep(arr, index, listPlayers);
+                if (listPlayers.get(0).getClass() == User.class && listPlayers.get(1).getClass() == User.class) {
+                    index = inputNumber();
+                    stepPlayers.doStep(arr, index, listPlayers);
+                    count++;
+                    index = inputNumber();
+                    stepPlayers.doStep(arr, index, listPlayers);
+                    count = 0;
+                }
 
-            }
-
-            if (listPlayers.get(0).getClass() == Computer.class) {
-                stepPlayers.doStep(arr, index, listPlayers);
                 showMatrix.fillMatrix(arr);
-                stepPlayers.doStep(arr, index, listPlayers);
+
+                boolean check = checkWin.checkWinForYou(arr);
+
+                if (check && checkWin.getSymbol() == '0') {
+                    System.out.println(listPlayers.get(0).getAliasName());
+                } else if (check && checkWin.getSymbol() == 'X') {
+                    System.out.println(listPlayers.get(1).getAliasName());
+                }
             }
-
-            if (listPlayers.get(0).getClass() == User.class && listPlayers.get(1).getClass() == User.class) {
-                index = inputNumber();
-                stepPlayers.doStep(arr, index, listPlayers);
-                count++;
-                index = inputNumber();
-                stepPlayers.doStep(arr, index, listPlayers);
-                count = 0;
+        } catch (IndexOutOfBoundsException e) {
+            methodStart();
+        } finally {
+            try {
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
-
-            showMatrix.fillMatrix(arr);
-
-            checkWin.checkWinForYou(arr);
-
         }
 
     }
@@ -81,7 +95,6 @@ public class Starter {
         int[] coordinate = new int[2];
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             a = bufferedReader.readLine();
 
             if (a != null || a.length() < 2 || isNumber(a)) {
@@ -102,49 +115,54 @@ public class Starter {
 
     }
 
-    public List<Player> choicePlayer() {
+    public List<Player> choicePlayer() throws IOException {
+
         List<Player> list = new ArrayList<>(2);
-        Scanner scanner = new Scanner(System.in);
+        List<String> names = new ArrayList<>(2);
         System.out.println(Output.choice);
-        String a = scanner.nextLine();
+        String a = bufferedReader.readLine();
+        names = inputAliasName(bufferedReader);
 
         switch (a) {
             case "1":
-                list.add(new User("0"));
-                list.add(new Computer("X"));
+
+                list.add(new User("0", names.get(0)));
+                list.add(new Computer("X", names.get(1)));
                 System.out.println(Output.HvsC);
                 break;
             case "2":
-                list.add(new Computer("0"));
-                list.add(new Computer("X"));
+
+                list.add(new Computer("0", names.get(0)));
+                list.add(new Computer("X", names.get(1)));
                 System.out.println(Output.CvsC);
                 break;
             case "3":
-                list.add(new User("0"));
-                list.add(new User("X"));
+                list.add(new User("0", names.get(0)));
+                list.add(new User("X", names.get(1)));
                 System.out.println(Output.HvsH);
                 break;
             default:
                 System.out.println(Output.error1);
                 break;
         }
-        scanner.close();
+
         return list;
     }
 
-    public List<Player> inputAliasName(List<Player> players){
+    public List<String> inputAliasName(BufferedReader bufferedReader) throws IOException {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Player1 name");
-        String name1 = scanner.nextLine();
-        players.get(0).setAliasName(name1);
+        List<String> list = new ArrayList<>(2);
 
-        System.out.println("Enter Player2 name");
-        String name2 = scanner.nextLine();
-        players.get(1).setAliasName(name2);
+        System.out.println(Output.name);
+        String name1 = bufferedReader.readLine();
+        list.add(name1);
 
-        scanner.close();
-        return players;
+        System.out.println(Output.name);
+        String name2 = bufferedReader.readLine();
+        list.add(name2);
+
+
+        return list;
 
     }
 

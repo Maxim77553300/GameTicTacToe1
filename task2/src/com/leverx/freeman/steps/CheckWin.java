@@ -4,6 +4,12 @@ import com.leverx.freeman.entity.Player;
 
 public class CheckWin {
 
+    private char symbol;
+
+    public char getSymbol() {
+        return symbol;
+    }
+
     public boolean win = false;
 
     Player player;
@@ -29,7 +35,6 @@ public class CheckWin {
     private boolean checkDiagonal1(char[][] arr) {
         int diagonal = 1;
         int start1 = arr[0][0];
-        char symbol;
 
 
         if (start1 != '|') {
@@ -39,12 +44,7 @@ public class CheckWin {
                     diagonal++;
                 }
             }
-
-            if (diagonal == 3 && symbol == '0') {
-                System.out.println(Output.youWin + player.getAliasName());
-                return true;
-            } else if (diagonal == 3 && symbol == 'X') {
-                System.out.println(Output.pcWin + player.getAliasName());
+            if(checkDiagonal(diagonal)){
                 return true;
             }
         }
@@ -54,10 +54,8 @@ public class CheckWin {
     private boolean checkDiagonal2(char[][] arr) {
 
         int diagonal = 0;
-        char symbol;
         char start2 = '|';
         int count = 0;
-
 
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length - 1; j++) {
@@ -82,14 +80,7 @@ public class CheckWin {
                 count--;
                 count1++;
             }
-
-            if (diagonal == 3 && symbol == '0') {
-
-                System.out.println(Output.youWin + player.getAliasName());
-                return true;
-            } else if (diagonal == 3 && symbol == 'X') {
-
-                System.out.println(Output.pcWin + player.getAliasName());
+            if(checkDiagonal(diagonal)){
                 return true;
             }
         }
@@ -106,19 +97,17 @@ public class CheckWin {
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length; j++) {
                 if (arr[i][j] == arr[i + 1][j] && arr[i][j] == '0') {
+                    symbol = '0';
                     vertical0++;
                 } else if (arr[i][j] == arr[i + 1][j] && arr[i][j] == 'X') {
+                    symbol = 'X';
                     verticalX++;
                 }
             }
 
-            if (vertical0 == 3) {
-                System.out.println(Output.youWin + player.getAliasName());
-                return true;
-            } else if (verticalX == 3) {
-                System.out.println(Output.pcWin + player.getAliasName());
-                return true;
-            }
+           if(checkVert(vertical0, verticalX)){
+               return true;
+           }
         }
         return false;
     }
@@ -128,25 +117,20 @@ public class CheckWin {
         int horizontalX = 1;
 
         for (int i = 0; i < arr.length; i++) {
-
             for (int j = 0; j < arr.length - 1; j++) {
-
                 if (arr[i][j] == arr[i][j + 1] && arr[i][j] == '0') {
+                    symbol = '0';
                     horizontal0++;
                 } else if (arr[i][j] == arr[i][j + 1] && arr[i][j] == 'X') {
+                    symbol = 'X';
                     horizontalX++;
                 }
             }
 
-            if (horizontal0 == 3) {
-                System.out.println(Output.youWin + player.getAliasName());
-                return true;
-            } else if (horizontalX == 3) {
-                System.out.println(Output.pcWin + player.getAliasName());
+            if(checkVert(horizontal0, horizontalX)){
                 return true;
             }
         }
-
         return false;
     }
 
@@ -160,16 +144,35 @@ public class CheckWin {
         }
 
         for (int i = 0; i < arr.length; i++) {
-
             for (int j = 0; j < arr.length; j++) {
-
                 if (arr[i][j] != '|') {
                     horizontal++;
                 }
             }
         }
-
         if (horizontal == size) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkDiagonal(int diagonal) {
+        if (diagonal == 3 && symbol == '0') {
+            System.out.println(Output.youWin);
+            return true;
+        } else if (diagonal == 3 && symbol == 'X') {
+            System.out.println(Output.youWin);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkVert(int vertical0, int verticalX) {
+        if (vertical0 == 3) {
+            System.out.println(Output.youWin);
+            return true;
+        } else if (verticalX == 3) {
+            System.out.println(Output.youWin);
             return true;
         }
         return false;

@@ -4,6 +4,8 @@ public class Computer implements Player {
 
     private String name;
 
+    private String aliasName;
+
     @Override
     public String getAliasName() {
         return aliasName;
@@ -13,7 +15,11 @@ public class Computer implements Player {
         this.aliasName = aliasName;
     }
 
-    private String aliasName;
+    public Computer(String name, String aliasName) {
+        this.name = name;
+        this.aliasName = aliasName;
+    }
+
 
     public Computer(String name) {
         this.name = name;
@@ -29,6 +35,6 @@ public class Computer implements Player {
 
     @Override
     public String getName1() {
-      return getName();
+        return getName();
     }
 }

@@ -22,12 +22,11 @@ public class StepPlayersImpl implements StepPlayers {
             arr = nextStepComputer(arr, index, players.get(1));
         } else if (players.get(0).getClass() == User.class && players.get(1).getClass() == User.class) {
 
-            if(Starter.count == 0) {
+            if (Starter.count == 0) {
                 arr = nextStepUser(arr, index, players.get(0));
             } else {
                 arr = nextStepUser(arr, index, players.get(1));
             }
-
         }
 
 
@@ -42,12 +41,9 @@ public class StepPlayersImpl implements StepPlayers {
         int j = index[1];
 
         char x = player.getName1().charAt(0);
-        System.out.println(x);
 
         if (arr[i][j] == '|') {
-
             arr[i][j] = x;
-
         }
 
         return arr;
@@ -55,6 +51,7 @@ public class StepPlayersImpl implements StepPlayers {
 
 
     public char[][] nextStepComputer(char[][] arr, int[] index, Player player) {
+
 
         Random random = new Random();
 
@@ -65,9 +62,8 @@ public class StepPlayersImpl implements StepPlayers {
         if (arr[i][j] == '|') {
             arr[i][j] = player.getName1().charAt(0);
         }
-//        else {
-//
-//        }
+
+
         return arr;
 
     }

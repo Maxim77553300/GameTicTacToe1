@@ -4,6 +4,13 @@ public class User implements Player {
 
     private String name;
 
+    private String aliasName;
+
+    public User(String name, String aliasName) {
+        this.name = name;
+        this.aliasName = aliasName;
+    }
+
     @Override
     public String getAliasName() {
         return aliasName;
@@ -12,8 +19,6 @@ public class User implements Player {
     public void setAliasName(String aliasName) {
         this.aliasName = aliasName;
     }
-
-    private String aliasName;
 
     public User(String name) {
         this.name = name;
@@ -29,6 +34,6 @@ public class User implements Player {
 
     @Override
     public String getName1() {
-          return getName();
+        return getName();
     }
 }
