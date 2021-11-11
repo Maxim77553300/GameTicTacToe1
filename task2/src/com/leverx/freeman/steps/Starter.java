@@ -25,6 +25,8 @@ public class Starter {
     private FillMatrix showMatrix;
     private char[][] arr = new char[3][3];
     private int[] index = null;
+    public static int count = 0;
+
 
     public void methodStart() throws MyException, IOException {
 
@@ -42,8 +44,10 @@ public class Starter {
         while (!checkWin.win) {
             showMatrix = new ShowMatrix();
 
-            if (listPlayers.get(0).getClass() == User.class) {
+
+            if (listPlayers.get(0).getClass() == User.class && listPlayers.get(1).getClass() == Computer.class) {
                 index = inputNumber();
+                stepPlayers.doStep(arr, index, listPlayers);
                 stepPlayers.doStep(arr, index, listPlayers);
 
             }
@@ -51,8 +55,18 @@ public class Starter {
             if (listPlayers.get(0).getClass() == Computer.class) {
                 stepPlayers.doStep(arr, index, listPlayers);
                 showMatrix.fillMatrix(arr);
+                stepPlayers.doStep(arr, index, listPlayers);
             }
-            stepPlayers.doStep(arr, index, listPlayers);
+
+            if (listPlayers.get(0).getClass() == User.class && listPlayers.get(1).getClass() == User.class) {
+                index = inputNumber();
+                stepPlayers.doStep(arr, index, listPlayers);
+                count++;
+                index = inputNumber();
+                stepPlayers.doStep(arr, index, listPlayers);
+                count = 0;
+            }
+
             showMatrix.fillMatrix(arr);
 
             checkWin.checkWinForYou(arr);
@@ -62,6 +76,7 @@ public class Starter {
     }
 
     public int[] inputNumber() {
+
         String a = null;
         int[] coordinate = new int[2];
 
@@ -69,7 +84,7 @@ public class Starter {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             a = bufferedReader.readLine();
 
-            if (a != null || a.length() < 2 || isNumber(a) == true) {
+            if (a != null || a.length() < 2 || isNumber(a)) {
 
                 coordinate[0] = Integer.parseInt(a.substring(0, 1));
                 coordinate[1] = Integer.parseInt(a.substring(1, 2));
@@ -113,6 +128,25 @@ public class Starter {
                 System.out.println(Output.error1);
                 break;
         }
+        scanner.close();
         return list;
     }
+
+    public List<Player> inputAliasName(List<Player> players){
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Player1 name");
+        String name1 = scanner.nextLine();
+        players.get(0).setAliasName(name1);
+
+        System.out.println("Enter Player2 name");
+        String name2 = scanner.nextLine();
+        players.get(1).setAliasName(name2);
+
+        scanner.close();
+        return players;
+
+    }
+
+
 }

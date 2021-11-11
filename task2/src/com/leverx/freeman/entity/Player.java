@@ -2,6 +2,10 @@ package com.leverx.freeman.entity;
 
 public interface Player {
 
-    void move();
+    String getName1();
+
+    String getAliasName();
+
+    void setAliasName(String name);
 
 }

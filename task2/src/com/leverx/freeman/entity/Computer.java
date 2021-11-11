@@ -4,6 +4,17 @@ public class Computer implements Player {
 
     private String name;
 
+    @Override
+    public String getAliasName() {
+        return aliasName;
+    }
+
+    public void setAliasName(String aliasName) {
+        this.aliasName = aliasName;
+    }
+
+    private String aliasName;
+
     public Computer(String name) {
         this.name = name;
     }
@@ -17,7 +28,7 @@ public class Computer implements Player {
     }
 
     @Override
-    public void move() {
-
+    public String getName1() {
+      return getName();
     }
 }

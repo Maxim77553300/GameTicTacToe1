@@ -1,8 +1,12 @@
 package com.leverx.freeman.steps;
 
+import com.leverx.freeman.entity.Player;
+
 public class CheckWin {
 
     public boolean win = false;
+
+    Player player;
 
     public boolean checkWinForYou(char[][] arr) {
 
@@ -37,10 +41,10 @@ public class CheckWin {
             }
 
             if (diagonal == 3 && symbol == '0') {
-                System.out.println(Output.youWin);
+                System.out.println(Output.youWin + player.getAliasName());
                 return true;
             } else if (diagonal == 3 && symbol == 'X') {
-                System.out.println(Output.pcWin);
+                System.out.println(Output.pcWin + player.getAliasName());
                 return true;
             }
         }
@@ -81,11 +85,11 @@ public class CheckWin {
 
             if (diagonal == 3 && symbol == '0') {
 
-                System.out.println(Output.youWin);
+                System.out.println(Output.youWin + player.getAliasName());
                 return true;
             } else if (diagonal == 3 && symbol == 'X') {
 
-                System.out.println(Output.pcWin);
+                System.out.println(Output.pcWin + player.getAliasName());
                 return true;
             }
         }
@@ -109,10 +113,10 @@ public class CheckWin {
             }
 
             if (vertical0 == 3) {
-                System.out.println(Output.youWin);
+                System.out.println(Output.youWin + player.getAliasName());
                 return true;
             } else if (verticalX == 3) {
-                System.out.println(Output.pcWin);
+                System.out.println(Output.pcWin + player.getAliasName());
                 return true;
             }
         }
@@ -135,10 +139,10 @@ public class CheckWin {
             }
 
             if (horizontal0 == 3) {
-                System.out.println(Output.youWin);
+                System.out.println(Output.youWin + player.getAliasName());
                 return true;
             } else if (horizontalX == 3) {
-                System.out.println(Output.pcWin);
+                System.out.println(Output.pcWin + player.getAliasName());
                 return true;
             }
         }
