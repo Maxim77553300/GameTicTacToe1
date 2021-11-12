@@ -40,7 +40,7 @@ public class StepPlayersImpl implements StepPlayers {
 
         int j = index[1];
 
-        char x = player.getName1().charAt(0);
+        char x = player.getName().charAt(0);
 
         if (arr[i][j] == '|') {
             arr[i][j] = x;
@@ -60,7 +60,7 @@ public class StepPlayersImpl implements StepPlayers {
         int j = random.nextInt(3);
 
         if (arr[i][j] == '|') {
-            arr[i][j] = player.getName1().charAt(0);
+            arr[i][j] = player.getName().charAt(0);
         }
 
 

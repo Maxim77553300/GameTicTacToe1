@@ -6,6 +6,10 @@ public class User implements Player {
 
     private String aliasName;
 
+    public User(String name) {
+        this.name = name;
+    }
+
     public User(String name, String aliasName) {
         this.name = name;
         this.aliasName = aliasName;
@@ -20,20 +24,12 @@ public class User implements Player {
         this.aliasName = aliasName;
     }
 
-    public User(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
     @Override
-    public String getName1() {
-        return getName();
+    public String getName() {
+        return name;
     }
 }

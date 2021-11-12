@@ -7,16 +7,11 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         Starter starter = new Starter();
 
-        try {
             starter.methodStart();
-
-        } catch (MyException | IOException e) {
-            System.out.println(e.getMessage());
-        }
 
     }
 }

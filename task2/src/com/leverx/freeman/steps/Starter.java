@@ -28,7 +28,7 @@ public class Starter {
     private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 
-    public void methodStart() throws MyException, IOException {
+    public void methodStart() {
         try {
 
             List<Player> listPlayers = choicePlayer();
@@ -75,7 +75,7 @@ public class Starter {
                     System.out.println(listPlayers.get(1).getAliasName());
                 }
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | IOException e) {
             methodStart();
         } finally {
             try {
