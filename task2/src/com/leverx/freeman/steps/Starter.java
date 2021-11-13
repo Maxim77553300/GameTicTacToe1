@@ -47,7 +47,6 @@ public class Starter {
                 if (listPlayers.get(0).getClass() == User.class && listPlayers.get(1).getClass() == Computer.class) {
                     index = inputNumber();
                     stepPlayers.doStep(arr, index, listPlayers);
-                    stepPlayers.doStep(arr, index, listPlayers);
                 }
 
                 if (listPlayers.get(0).getClass() == Computer.class) {
@@ -67,13 +66,23 @@ public class Starter {
 
                 showMatrix.fillMatrix(arr);
 
-                boolean check = checkWin.checkWinForYou(arr);
-
-                if (check && checkWin.getSymbol() == '0') {
+                boolean check ;
+                if(checkWin.checkWinForYou(arr, listPlayers.get(0))) {
                     System.out.println(listPlayers.get(0).getAliasName());
-                } else if (check && checkWin.getSymbol() == 'X') {
+                }else if(checkWin.checkWinForYou(arr, listPlayers.get(1))) {
                     System.out.println(listPlayers.get(1).getAliasName());
                 }
+
+
+
+
+//                if (check && checkWin.getSymbol() == '0') {
+//                    System.out.println(listPlayers.get(0).getAliasName() + " " + listPlayers.get(1).getAliasName());
+//                    System.out.println(listPlayers.get(0).getAliasName());
+//                } else if (check && checkWin.getSymbol() == 'X') {
+//                    System.out.println(listPlayers.get(0).getAliasName() + " " + listPlayers.get(1).getAliasName());
+//                    System.out.println(listPlayers.get(1).getAliasName());
+//                }
             }
         } catch (IndexOutOfBoundsException | IOException e) {
             methodStart();
@@ -86,6 +95,7 @@ public class Starter {
                 System.out.println(e.getMessage());
             }
         }
+
 
     }
 
@@ -108,6 +118,7 @@ public class Starter {
             return coordinate;
 
         } catch (IOException | MyException e) {
+            inputNumber();
             e.getMessage();
         }
 
@@ -153,11 +164,11 @@ public class Starter {
 
         List<String> list = new ArrayList<>(2);
 
-        System.out.println(Output.name);
+        System.out.println(Output.name1);
         String name1 = bufferedReader.readLine();
         list.add(name1);
 
-        System.out.println(Output.name);
+        System.out.println(Output.name2);
         String name2 = bufferedReader.readLine();
         list.add(name2);
 

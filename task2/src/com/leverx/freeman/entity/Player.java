@@ -2,10 +2,14 @@ package com.leverx.freeman.entity;
 
 public interface Player {
 
-    String getName();
+    String getView();
 
     String getAliasName();
 
     void setAliasName(String name);
+
+    boolean isWin();
+
+    void setWin(boolean win);
 
 }

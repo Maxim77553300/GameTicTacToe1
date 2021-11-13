@@ -15,7 +15,8 @@ public class Output {
     protected static final String HvsC = bundle.getString("HvsC");
     protected static final String CvsC = bundle.getString("CvsC");
     protected static final String HvsH = bundle.getString("HvsH");
-    protected static final String name = bundle.getString("name");
+    protected static final String name1 = bundle.getString("name1");
+    protected static final String name2 = bundle.getString("name2");
 
     public static String getLine() {
         return line;

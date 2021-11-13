@@ -4,8 +4,10 @@ import com.leverx.freeman.entity.Computer;
 import com.leverx.freeman.entity.Player;
 import com.leverx.freeman.entity.User;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class StepPlayersImpl implements StepPlayers {
 
@@ -40,11 +42,29 @@ public class StepPlayersImpl implements StepPlayers {
 
         int j = index[1];
 
-        char x = player.getName().charAt(0);
+        char x = player.getView().charAt(0);
 
-        if (arr[i][j] == '|') {
-            arr[i][j] = x;
+        boolean flag = true;
+
+        while (flag) {
+
+            if (arr[i][j] == '0' || arr[i][j] == 'X') {
+                System.out.println("This place is occupied,please enter another coordinate!");
+                Scanner scanner = new Scanner(System.in);
+                String a = scanner.nextLine();
+                i = Integer.parseInt(a.substring(0, 1));
+                j = Integer.parseInt(a.substring(1, 2));
+
+            }
+
+            if (arr[i][j] == '|') {
+                arr[i][j] = x;
+                flag = false;
+            }
+
+
         }
+
 
         return arr;
     }
@@ -52,15 +72,26 @@ public class StepPlayersImpl implements StepPlayers {
 
     public char[][] nextStepComputer(char[][] arr, int[] index, Player player) {
 
-
         Random random = new Random();
+
+        boolean flag = true;
+
 
         int i = random.nextInt(3);
 
         int j = random.nextInt(3);
 
-        if (arr[i][j] == '|') {
-            arr[i][j] = player.getName().charAt(0);
+        while (flag) {
+
+            if (arr[i][j] == '0' || arr[i][j] == 'X') {
+                System.out.println("PC This place is occupied!! Please, enter new coordinate!");
+                i = random.nextInt(3);
+                j = random.nextInt(3);
+            }
+            if (arr[i][j] == '|') {
+                arr[i][j] = player.getView().charAt(0);
+                flag = false;
+            }
         }
 
 

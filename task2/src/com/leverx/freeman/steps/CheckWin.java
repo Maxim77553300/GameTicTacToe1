@@ -14,7 +14,7 @@ public class CheckWin {
 
     Player player;
 
-    public boolean checkWinForYou(char[][] arr) {
+    public boolean checkWinForYou(char[][] arr, Player player) {
 
         if (checkDiagonal1(arr)) {
             win = true;
@@ -29,6 +29,7 @@ public class CheckWin {
             System.out.println(Output.draw);
             System.exit(1);
         }
+        player.setWin(true);
         return win;
     }
 

@@ -2,16 +2,18 @@ package com.leverx.freeman.entity;
 
 public class Computer implements Player {
 
-    private String name;
+    private String view;
 
     private String aliasName;
 
+    private boolean win;
+
     public Computer(String name) {
-        this.name = name;
+        this.view = name;
     }
 
     public Computer(String name, String aliasName) {
-        this.name = name;
+        this.view = name;
         this.aliasName = aliasName;
     }
 
@@ -24,12 +26,22 @@ public class Computer implements Player {
         this.aliasName = aliasName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setView(String view) {
+        this.view = view;
     }
 
     @Override
-    public String getName() {
-        return name;
+    public String getView() {
+        return view;
+    }
+
+    @Override
+    public boolean isWin() {
+        return win;
+    }
+
+    @Override
+    public void setWin(boolean win){
+        this.win = win;
     }
 }
