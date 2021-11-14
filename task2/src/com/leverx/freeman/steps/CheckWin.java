@@ -5,30 +5,10 @@ import com.leverx.freeman.entity.Player;
 public class CheckWin {
 
     private char symbol;
-    protected boolean win = false;
-    private Player player;
-
-    public char getSymbol() {
-        return symbol;
-    }
 
     public boolean checkWinForYou(char[][] arr, Player player) {
 
-        if (checkDiagonal1(arr)) {
-            win = true;
-        } else if (checkDiagonal2(arr)) {
-            win = true;
-        } else if (checkHorizontal(arr)) {
-            win = true;
-        } else if (checkVertical(arr)) {
-            win = true;
-        } else if (checkNoneWin(arr)) {
-            win = false;
-            System.out.println(Output.draw);
-            System.exit(1);
-        }
-        player.setWin(true);
-        return win;
+        return checkDiagonal1(arr) || checkDiagonal2(arr) || checkHorizontal(arr) || checkVertical(arr);
     }
 
     private boolean checkDiagonal1(char[][] arr) {
@@ -43,9 +23,7 @@ public class CheckWin {
                     diagonal++;
                 }
             }
-            if (checkDiagonal(diagonal)) {
-                return true;
-            }
+            return checkDiagonal(diagonal);
         }
         return false;
     }
@@ -79,9 +57,7 @@ public class CheckWin {
                 count--;
                 count1++;
             }
-            if (checkDiagonal(diagonal)) {
-                return true;
-            }
+            return checkDiagonal(diagonal);
         }
 
         return false;
@@ -133,7 +109,7 @@ public class CheckWin {
         return false;
     }
 
-    private boolean checkNoneWin(char[][] arr) {
+    public static boolean checkNoneWin(char[][] arr) {
 
         int horizontal = 0;
 
@@ -149,17 +125,11 @@ public class CheckWin {
                 }
             }
         }
-        if (horizontal == size) {
-            return true;
-        }
-        return false;
+        return horizontal == size;
     }
 
     private boolean checkDiagonal(int diagonal) {
-        if (diagonal == 3 && symbol == '0') {
-            System.out.println(Output.youWin);
-            return true;
-        } else if (diagonal == 3 && symbol == 'X') {
+        if (diagonal == 3 && (symbol == '0' || symbol == 'X')) {
             System.out.println(Output.youWin);
             return true;
         }
@@ -167,10 +137,7 @@ public class CheckWin {
     }
 
     private boolean checkVert(int vertical0, int verticalX) {
-        if (vertical0 == 3) {
-            System.out.println(Output.youWin);
-            return true;
-        } else if (verticalX == 3) {
+        if (vertical0 == 3 || verticalX == 3) {
             System.out.println(Output.youWin);
             return true;
         }

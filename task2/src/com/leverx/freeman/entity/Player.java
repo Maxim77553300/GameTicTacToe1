@@ -8,8 +8,4 @@ public interface Player {
 
     void setAliasName(String name);
 
-    boolean isWin();
-
-    void setWin(boolean win);
-
 }

@@ -3,7 +3,7 @@ package com.leverx.freeman.steps;
 import com.leverx.freeman.entity.Computer;
 import com.leverx.freeman.entity.Player;
 import com.leverx.freeman.entity.User;
-import com.leverx.freeman.exceptions.MyException;
+import com.leverx.freeman.exceptions.MyAppException;
 import com.leverx.freeman.fill.FillMatrix;
 import com.leverx.freeman.fill.FillMatrixImpl;
 import com.leverx.freeman.fill.ShowMatrix;
@@ -16,18 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static jdk.nashorn.internal.runtime.JSType.isNumber;
 
 public class Starter {
 
-    private StarterFill starterFill = new StarterFill();
-    private CheckWin checkWin = new CheckWin();
+    private final StarterFill starterFill = new StarterFill();
+    private final CheckWin checkWin = new CheckWin();
     private FillMatrix showMatrix;
-    private char[][] arr = new char[3][3];
+    private final char[][] arr = new char[3][3];
     private int[] index = null;
     protected static int count = 0;
-    private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-    private Scanner scanner = new Scanner(System.in);
+    private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    private final Scanner scanner = new Scanner(System.in);
 
     public Scanner getScanner() {
         return scanner;
@@ -41,8 +40,9 @@ public class Starter {
             starterFill.fill = new FillMatrixImpl();
             int i = 1;
             starterFill.fill.fillMatrix(arr);
+            boolean win = false;
 
-            while (!checkWin.win) {
+            while (!win) {
                 showMatrix = new ShowMatrix();
 
                 if (listPlayers.get(0).getClass() == User.class && listPlayers.get(1).getClass() == Computer.class) {
@@ -67,7 +67,7 @@ public class Starter {
 
                 showMatrix.fillMatrix(arr);
 
-                outputWinner(listPlayers);
+                win = outputWinner(listPlayers);
 
 
             }
@@ -92,17 +92,17 @@ public class Starter {
         try {
             a = bufferedReader.readLine();
 
-            if (a != null || a.length() < 2 || isNumber(a)) {
+            if (a != null && a.length() == 2 && isNumber(a)) {
 
                 coordinate[0] = Integer.parseInt(a.substring(0, 1));
                 coordinate[1] = Integer.parseInt(a.substring(1, 2));
 
             } else {
-                throw new MyException(Output.error1);
+                throw new MyAppException(Output.error1);
             }
             return coordinate;
 
-        } catch (IOException | MyException e) {
+        } catch (IOException | MyAppException e) {
             inputNumber();
             e.getMessage();
         }
@@ -157,17 +157,36 @@ public class Starter {
         String name2 = bufferedReader.readLine();
         list.add(name2);
 
-
         return list;
 
     }
 
-    private void outputWinner(List<Player> listPlayers){
+    private boolean outputWinner(List<Player> listPlayers) {
+
+
+        if (CheckWin.checkNoneWin(arr)) {
+            System.out.println(Output.draw);
+            System.exit(1);
+        }
         if (checkWin.checkWinForYou(arr, listPlayers.get(0))) {
             System.out.println(listPlayers.get(0).getAliasName());
+            return true;
         } else if (checkWin.checkWinForYou(arr, listPlayers.get(1)) && !checkWin.checkWinForYou(arr, listPlayers.get(0))) {
             System.out.println(listPlayers.get(1).getAliasName());
+            return true;
         }
+        return false;
+    }
+
+    private boolean isNumber(String a) {
+
+        try {
+            Integer.parseInt(a);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
     }
 
 

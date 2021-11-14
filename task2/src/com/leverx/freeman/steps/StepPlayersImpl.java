@@ -62,22 +62,19 @@ public class StepPlayersImpl implements StepPlayers {
 
         Random random = new Random();
 
-        boolean flag = true;
-        int i = random.nextInt(3);
-        int j = random.nextInt(3);
+        int i;
+        int j;
 
-        while (flag) {
+        while (true) {
 
-            if (arr[i][j] == '0' || arr[i][j] == 'X') {
-                i = random.nextInt(3);
-                j = random.nextInt(3);
-            }
+            i = random.nextInt(3);
+            j = random.nextInt(3);
+
             if (arr[i][j] == '|') {
                 arr[i][j] = player.getView().charAt(0);
-                flag = false;
+                return arr;
             }
         }
-        return arr;
 
     }
 }

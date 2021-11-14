@@ -6,8 +6,6 @@ public class Computer implements Player {
 
     private String aliasName;
 
-    private boolean win;
-
     public Computer(String name) {
         this.view = name;
     }
@@ -35,13 +33,4 @@ public class Computer implements Player {
         return view;
     }
 
-    @Override
-    public boolean isWin() {
-        return win;
-    }
-
-    @Override
-    public void setWin(boolean win) {
-        this.win = win;
-    }
 }
