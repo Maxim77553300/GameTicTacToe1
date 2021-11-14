@@ -5,14 +5,12 @@ import com.leverx.freeman.entity.Player;
 public class CheckWin {
 
     private char symbol;
+    protected boolean win = false;
+    private Player player;
 
     public char getSymbol() {
         return symbol;
     }
-
-    public boolean win = false;
-
-    Player player;
 
     public boolean checkWinForYou(char[][] arr, Player player) {
 
@@ -34,9 +32,9 @@ public class CheckWin {
     }
 
     private boolean checkDiagonal1(char[][] arr) {
+
         int diagonal = 1;
         int start1 = arr[0][0];
-
 
         if (start1 != '|') {
             symbol = arr[0][0];
@@ -45,7 +43,7 @@ public class CheckWin {
                     diagonal++;
                 }
             }
-            if(checkDiagonal(diagonal)){
+            if (checkDiagonal(diagonal)) {
                 return true;
             }
         }
@@ -70,18 +68,18 @@ public class CheckWin {
         start2 = arr[0][count];
 
         if (start2 != '|') {
+
             int count1 = 0;
             symbol = arr[0][count];
 
             while (count >= 0) {
                 if (arr[count1][count] == symbol) {
                     diagonal++;
-
                 }
                 count--;
                 count1++;
             }
-            if(checkDiagonal(diagonal)){
+            if (checkDiagonal(diagonal)) {
                 return true;
             }
         }
@@ -106,9 +104,9 @@ public class CheckWin {
                 }
             }
 
-           if(checkVert(vertical0, verticalX)){
-               return true;
-           }
+            if (checkVert(vertical0, verticalX)) {
+                return true;
+            }
         }
         return false;
     }
@@ -128,7 +126,7 @@ public class CheckWin {
                 }
             }
 
-            if(checkVert(horizontal0, horizontalX)){
+            if (checkVert(horizontal0, horizontalX)) {
                 return true;
             }
         }

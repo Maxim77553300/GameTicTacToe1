@@ -8,7 +8,7 @@ public class Main {
 
         Starter starter = new Starter();
 
-            starter.methodStart();
+        starter.methodStart();
 
     }
 }

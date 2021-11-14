@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static jdk.nashorn.internal.runtime.JSType.isNumber;
 
@@ -24,21 +25,21 @@ public class Starter {
     private FillMatrix showMatrix;
     private char[][] arr = new char[3][3];
     private int[] index = null;
-    public static int count = 0;
+    protected static int count = 0;
     private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    private Scanner scanner = new Scanner(System.in);
 
+    public Scanner getScanner() {
+        return scanner;
+    }
 
     public void methodStart() {
         try {
 
             List<Player> listPlayers = choicePlayer();
-
             StepPlayers stepPlayers = new StepPlayersImpl();
-
             starterFill.fill = new FillMatrixImpl();
-
             int i = 1;
-
             starterFill.fill.fillMatrix(arr);
 
             while (!checkWin.win) {
@@ -66,23 +67,9 @@ public class Starter {
 
                 showMatrix.fillMatrix(arr);
 
-                boolean check ;
-                if(checkWin.checkWinForYou(arr, listPlayers.get(0))) {
-                    System.out.println(listPlayers.get(0).getAliasName());
-                }else if(checkWin.checkWinForYou(arr, listPlayers.get(1))) {
-                    System.out.println(listPlayers.get(1).getAliasName());
-                }
+                outputWinner(listPlayers);
 
 
-
-
-//                if (check && checkWin.getSymbol() == '0') {
-//                    System.out.println(listPlayers.get(0).getAliasName() + " " + listPlayers.get(1).getAliasName());
-//                    System.out.println(listPlayers.get(0).getAliasName());
-//                } else if (check && checkWin.getSymbol() == 'X') {
-//                    System.out.println(listPlayers.get(0).getAliasName() + " " + listPlayers.get(1).getAliasName());
-//                    System.out.println(listPlayers.get(1).getAliasName());
-//                }
             }
         } catch (IndexOutOfBoundsException | IOException e) {
             methodStart();
@@ -95,8 +82,6 @@ public class Starter {
                 System.out.println(e.getMessage());
             }
         }
-
-
     }
 
     public int[] inputNumber() {
@@ -175,6 +160,14 @@ public class Starter {
 
         return list;
 
+    }
+
+    private void outputWinner(List<Player> listPlayers){
+        if (checkWin.checkWinForYou(arr, listPlayers.get(0))) {
+            System.out.println(listPlayers.get(0).getAliasName());
+        } else if (checkWin.checkWinForYou(arr, listPlayers.get(1)) && !checkWin.checkWinForYou(arr, listPlayers.get(0))) {
+            System.out.println(listPlayers.get(1).getAliasName());
+        }
     }
 
 

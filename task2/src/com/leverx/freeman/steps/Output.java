@@ -11,6 +11,7 @@ public class Output {
     private static final String line = bundle.getString("line");
     protected static final String draw = bundle.getString("draw");
     protected static final String error1 = bundle.getString("error1");
+    protected static final String error2 = bundle.getString("error2");
     protected static final String choice = bundle.getString("choice");
     protected static final String HvsC = bundle.getString("HvsC");
     protected static final String CvsC = bundle.getString("CvsC");

@@ -40,7 +40,7 @@ public class User implements Player {
         return win;
     }
 
-    public void setWin(boolean win){
+    public void setWin(boolean win) {
         this.win = win;
     }
 }

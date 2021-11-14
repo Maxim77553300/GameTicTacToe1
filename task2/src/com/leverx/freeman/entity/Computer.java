@@ -41,7 +41,7 @@ public class Computer implements Player {
     }
 
     @Override
-    public void setWin(boolean win){
+    public void setWin(boolean win) {
         this.win = win;
     }
 }
