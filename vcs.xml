@@ -70,6 +70,10 @@
           <option name="url" value="https://github.com/Maxim77553300/DealerStat.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/Maxim77553300/Dealers.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="C:\Users\Dell Latitude 5580\Java\copy" />
