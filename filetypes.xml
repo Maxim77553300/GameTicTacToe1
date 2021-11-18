@@ -1,6 +1,7 @@
 <application>
   <component name="FileTypeManager" version="18">
     <extensionMap>
+      <mapping pattern="DbSqlProject.png" type="AUTO_DETECTED" />
       <mapping pattern="src" type="AUTO_DETECTED" />
       <mapping pattern="login1" type="AUTO_DETECTED" />
       <mapping pattern="login.html" type="AUTO_DETECTED" />
